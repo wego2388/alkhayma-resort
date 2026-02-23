@@ -45,11 +45,6 @@ const router = createRouter({
       component: () => import('@/views/Login.vue')
     },
     {
-      path: '/register',
-      name: 'register',
-      component: () => import('@/views/Register.vue')
-    },
-    {
       path: '/account',
       name: 'account',
       component: () => import('@/views/Account.vue'),
@@ -58,8 +53,7 @@ const router = createRouter({
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: () => import('@/views/Dashboard.vue'),
-      meta: { requiresAuth: true, requiresAdmin: true }
+      component: () => import('@/views/Dashboard.vue')
     }
   ]
 })

@@ -7,6 +7,7 @@ from app.core.security import verify_password, get_password_hash, create_access_
 from app.core.config import settings
 from app.models import User
 from app.schemas.user import UserCreate, UserResponse, Token
+from app.api.deps import get_current_active_user
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -57,6 +58,5 @@ def login(
     return {"access_token": access_token, "token_type": "bearer"}
 
 @router.get("/me", response_model=UserResponse)
-def get_me(db: Session = Depends(get_db), token: str = Depends(OAuth2PasswordRequestForm)):
-    from app.api.deps import get_current_active_user
-    return Depends(get_current_active_user)
+def get_me(current_user: User = Depends(get_current_active_user)):
+    return current_user

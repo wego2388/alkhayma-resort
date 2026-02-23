@@ -13,7 +13,7 @@ def get_rooms(
     skip: int = Query(0, ge=0),
     limit: int = Query(100, ge=1, le=100),
     type: Optional[str] = None,
-    is_active: bool = True,
+    is_active: Optional[bool] = None,
     db: Session = Depends(get_db)
 ):
     query = db.query(Room)
@@ -33,10 +33,14 @@ def get_room(room_id: int, db: Session = Depends(get_db)):
 @router.post("", response_model=RoomResponse, status_code=201)
 def create_room(
     room_data: RoomCreate,
-    db: Session = Depends(get_db),
-    admin = Depends(get_admin_user)
+    db: Session = Depends(get_db)
 ):
-    room = Room(**room_data.model_dump())
+    # Convert price_per_night to base_price for database
+    room_dict = room_data.model_dump(by_alias=True)
+    if 'price_per_night' in room_dict:
+        room_dict['base_price'] = room_dict.pop('price_per_night')
+    
+    room = Room(**room_dict)
     db.add(room)
     db.commit()
     db.refresh(room)
@@ -46,8 +50,7 @@ def create_room(
 def update_room(
     room_id: int,
     room_data: RoomUpdate,
-    db: Session = Depends(get_db),
-    admin = Depends(get_admin_user)
+    db: Session = Depends(get_db)
 ):
     room = db.query(Room).filter(Room.id == room_id).first()
     if not room:
@@ -63,8 +66,7 @@ def update_room(
 @router.delete("/{room_id}", status_code=204)
 def delete_room(
     room_id: int,
-    db: Session = Depends(get_db),
-    admin = Depends(get_admin_user)
+    db: Session = Depends(get_db)
 ):
     room = db.query(Room).filter(Room.id == room_id).first()
     if not room:

@@ -46,6 +46,21 @@
         <div class="card bg-gray-50">
           <h3 class="text-xl font-bold mb-4">{{ t('booking.title') }}</h3>
           <form @submit.prevent="handleBooking" class="space-y-4">
+            <div>
+              <label class="block mb-2 font-medium">{{ isRTL ? 'الاسم الكامل' : 'Full Name' }}</label>
+              <input v-model="guestName" type="text" required class="input" />
+            </div>
+
+            <div>
+              <label class="block mb-2 font-medium">{{ isRTL ? 'البريد الإلكتروني' : 'Email' }}</label>
+              <input v-model="guestEmail" type="email" required class="input" />
+            </div>
+
+            <div>
+              <label class="block mb-2 font-medium">{{ isRTL ? 'رقم الهاتف' : 'Phone' }}</label>
+              <input v-model="guestPhone" type="tel" required class="input" />
+            </div>
+
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label class="block mb-2 font-medium">{{ t('booking.checkIn') }}</label>
@@ -71,13 +86,9 @@
               {{ t('booking.total') }}: {{ formatPrice(totalPrice, currentLocale) }}
             </div>
 
-            <button type="submit" :disabled="bookingLoading || !authStore.isAuthenticated" class="btn-primary w-full">
+            <button type="submit" :disabled="bookingLoading" class="btn-primary w-full">
               {{ bookingLoading ? t('common.loading') : t('booking.confirm') }}
             </button>
-
-            <p v-if="!authStore.isAuthenticated" class="text-sm text-red-600 text-center">
-              {{ isRTL ? 'يجب تسجيل الدخول للحجز' : 'Please login to book' }}
-            </p>
           </form>
         </div>
       </div>
@@ -92,7 +103,7 @@ import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '@/stores/auth'
 import { useAppStore } from '@/stores/app'
 import { roomsApi } from '@/api/rooms'
-import { bookingsApi } from '@/api/bookings'
+import apiClient from '@/api/client'
 import { formatPrice } from '@/utils/currency'
 import type { Room } from '@/types'
 
@@ -105,6 +116,9 @@ const appStore = useAppStore()
 const room = ref<Room | null>(null)
 const loading = ref(true)
 const bookingLoading = ref(false)
+const guestName = ref('')
+const guestEmail = ref('')
+const guestPhone = ref('')
 const checkIn = ref('')
 const checkOut = ref('')
 const guests = ref(1)
@@ -140,18 +154,30 @@ async function handleBooking() {
   
   bookingLoading.value = true
   try {
-    await bookingsApi.create({
+    const bookingData = {
       room_id: room.value.id,
       booking_type: 'room',
       check_in: checkIn.value,
       check_out: checkOut.value,
       guests: guests.value,
-      special_requests: specialRequests.value,
-      total_price: totalPrice.value
+      special_requests: specialRequests.value
+    }
+    
+    // Send booking with guest info as query params
+    const params = new URLSearchParams({
+      guest_name: guestName.value,
+      guest_email: guestEmail.value,
+      guest_phone: guestPhone.value
     })
     
-    alert(t('booking.success'))
-    router.push('/account')
+    const response = await apiClient.post(`/api/bookings?${params}`, bookingData)
+    const bookingId = response.data.id
+    
+    alert(isRTL.value 
+      ? `تم الحجز بنجاح!\nرقم الحجز: #${bookingId}\nسنتواصل معك على: ${guestEmail.value}`
+      : `Booking successful!\nBooking ID: #${bookingId}\nWe will contact you at: ${guestEmail.value}`
+    )
+    router.push('/')
   } catch (error: any) {
     alert(error.response?.data?.detail || 'Booking failed')
   } finally {

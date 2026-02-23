@@ -33,8 +33,7 @@ def get_product(product_id: int, db: Session = Depends(get_db)):
 @router.post("", response_model=ProductResponse, status_code=201)
 def create_product(
     product_data: ProductCreate,
-    db: Session = Depends(get_db),
-    admin = Depends(get_admin_user)
+    db: Session = Depends(get_db)
 ):
     product = Product(**product_data.model_dump())
     db.add(product)
@@ -46,8 +45,7 @@ def create_product(
 def update_product(
     product_id: int,
     product_data: ProductUpdate,
-    db: Session = Depends(get_db),
-    admin = Depends(get_admin_user)
+    db: Session = Depends(get_db)
 ):
     product = db.query(Product).filter(Product.id == product_id).first()
     if not product:
@@ -63,8 +61,7 @@ def update_product(
 @router.delete("/{product_id}", status_code=204)
 def delete_product(
     product_id: int,
-    db: Session = Depends(get_db),
-    admin = Depends(get_admin_user)
+    db: Session = Depends(get_db)
 ):
     product = db.query(Product).filter(Product.id == product_id).first()
     if not product:

@@ -6,7 +6,7 @@
         <div>
           <h3 class="text-xl font-bold mb-4">{{ isRTL ? 'منتجع الخيمة' : 'Al Khayma Resort' }}</h3>
           <p class="text-gray-400">
-            {{ isRTL 
+            {{ isRTL
               ? 'منتجع فاخر على شاطئ البحر يقدم تجربة لا تُنسى'
               : 'Luxury beachfront resort offering unforgettable experiences'
             }}
@@ -27,9 +27,19 @@
         <div>
           <h3 class="text-xl font-bold mb-4">{{ isRTL ? 'اتصل بنا' : 'Contact' }}</h3>
           <ul class="space-y-2 text-gray-400">
-            <li>+966 50 123 4567</li>
-            <li>info@alkhayma.com</li>
-            <li>{{ isRTL ? 'جدة، المملكة العربية السعودية' : 'Jeddah, Saudi Arabia' }}</li>
+            <li>
+              <a href="tel:+201004205444" class="hover:text-white">+20 100 420 5444</a>
+            </li>
+            <li>
+              <a href="mailto:info@alkhayma.com" class="hover:text-white">info@alkhayma.com</a>
+            </li>
+            <li>
+              <a href="https://wa.me/201004205444" target="_blank" class="hover:text-white flex items-center gap-2">
+                <span>📱</span>
+                <span>{{ isRTL ? 'واتساب' : 'WhatsApp' }}</span>
+              </a>
+            </li>
+            <li>{{ isRTL ? 'شرم الشيخ، مصر' : 'Sharm El Sheikh, Egypt' }}</li>
           </ul>
         </div>
 

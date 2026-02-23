@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, field_validator
 from typing import Optional, List
 from datetime import datetime
 from decimal import Decimal
@@ -8,11 +8,15 @@ class RoomBase(BaseModel):
     name_ar: str
     description: Optional[str] = None
     description_ar: Optional[str] = None
-    type: str
+    type: Optional[str] = "standard"
     capacity: int
-    base_price: Decimal
+    price_per_night: Decimal = Field(alias="base_price")
     image_url: Optional[str] = None
     amenities: Optional[List[str]] = []
+    is_active: Optional[bool] = True
+    
+    class Config:
+        populate_by_name = True
 
 class RoomCreate(RoomBase):
     pass

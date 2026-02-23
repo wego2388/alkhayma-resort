@@ -11,7 +11,11 @@ class BookingBase(BaseModel):
     check_out: Optional[date] = None
     booking_date: Optional[datetime] = None
     guests: int = 1
+    total_price: Optional[Decimal] = None
     special_requests: Optional[str] = None
+    guest_name: Optional[str] = None
+    guest_email: Optional[str] = None
+    guest_phone: Optional[str] = None
 
 class BookingCreate(BookingBase):
     pass
@@ -22,7 +26,7 @@ class BookingUpdate(BaseModel):
 
 class BookingResponse(BookingBase):
     id: int
-    user_id: int
+    user_id: Optional[int] = None
     total_price: Decimal
     status: str
     created_at: datetime

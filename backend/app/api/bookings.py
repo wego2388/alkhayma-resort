@@ -7,6 +7,7 @@ from app.models import Booking, Room, Product
 from app.schemas.booking import BookingCreate, BookingUpdate, BookingResponse
 from app.schemas.room import RoomResponse
 from app.api.deps import get_current_active_user, get_admin_user
+from typing import Optional
 
 router = APIRouter(prefix="/bookings", tags=["Bookings"])
 
@@ -35,14 +36,10 @@ def get_bookings(
     skip: int = Query(0, ge=0),
     limit: int = Query(100, ge=1, le=100),
     status: str = None,
-    db: Session = Depends(get_db),
-    current_user = Depends(get_current_active_user)
+    db: Session = Depends(get_db)
 ):
+    """Get all bookings - no auth required for demo"""
     query = db.query(Booking)
-    
-    # Non-admin users see only their bookings
-    if current_user.role != "admin":
-        query = query.filter(Booking.user_id == current_user.id)
     
     if status:
         query = query.filter(Booking.status == status)
@@ -52,53 +49,70 @@ def get_bookings(
 @router.get("/{booking_id}", response_model=BookingResponse)
 def get_booking(
     booking_id: int,
-    db: Session = Depends(get_db),
-    current_user = Depends(get_current_active_user)
+    db: Session = Depends(get_db)
 ):
     booking = db.query(Booking).filter(Booking.id == booking_id).first()
     if not booking:
         raise HTTPException(status_code=404, detail="Booking not found")
-    
-    # Check ownership
-    if current_user.role != "admin" and booking.user_id != current_user.id:
-        raise HTTPException(status_code=403, detail="Not authorized")
     
     return booking
 
 @router.post("", response_model=BookingResponse, status_code=201)
 def create_booking(
     booking_data: BookingCreate,
-    db: Session = Depends(get_db),
-    current_user = Depends(get_current_active_user)
+    db: Session = Depends(get_db)
 ):
-    # Calculate price
-    total_price = calculate_booking_price(booking_data, db)
-    
-    # Create booking
-    booking = Booking(
-        **booking_data.model_dump(),
-        user_id=current_user.id,
-        total_price=total_price
-    )
-    db.add(booking)
-    db.commit()
-    db.refresh(booking)
-    return booking
+    """Create booking without authentication - for guests"""
+    try:
+        # Extract guest info
+        guest_name = booking_data.guest_name
+        guest_email = booking_data.guest_email
+        guest_phone = booking_data.guest_phone
+        
+        # Create special_requests from guest info
+        special_requests = None
+        if guest_name and guest_email and guest_phone:
+            special_requests = f"Guest: {guest_name}, Email: {guest_email}, Phone: {guest_phone}"
+        
+        # Use provided total_price or calculate it
+        if booking_data.total_price:
+            total_price = float(booking_data.total_price)
+        else:
+            total_price = calculate_booking_price(booking_data, db)
+        
+        # Create booking
+        booking = Booking(
+            booking_type=booking_data.booking_type,
+            room_id=booking_data.room_id,
+            product_id=booking_data.product_id,
+            check_in=booking_data.check_in,
+            check_out=booking_data.check_out,
+            booking_date=booking_data.booking_date,
+            guests=booking_data.guests,
+            user_id=None,
+            total_price=total_price,
+            special_requests=special_requests,
+            status='pending'
+        )
+        db.add(booking)
+        db.commit()
+        db.refresh(booking)
+        return booking
+    except Exception as e:
+        db.rollback()
+        print(f"Error creating booking: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.put("/{booking_id}", response_model=BookingResponse)
 def update_booking(
     booking_id: int,
     booking_data: BookingUpdate,
-    db: Session = Depends(get_db),
-    current_user = Depends(get_current_active_user)
+    db: Session = Depends(get_db)
 ):
+    """Update booking - no auth required for demo"""
     booking = db.query(Booking).filter(Booking.id == booking_id).first()
     if not booking:
         raise HTTPException(status_code=404, detail="Booking not found")
-    
-    # Check ownership or admin
-    if current_user.role != "admin" and booking.user_id != current_user.id:
-        raise HTTPException(status_code=403, detail="Not authorized")
     
     for key, value in booking_data.model_dump(exclude_unset=True).items():
         setattr(booking, key, value)

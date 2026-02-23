@@ -20,20 +20,17 @@
           </button>
 
           <!-- Auth Links -->
-          <template v-if="isAuthenticated">
-            <router-link to="/account" class="hover:text-primary-600">
-              {{ t('nav.account') }}
+          <template v-if="isAuthenticated && isAdmin">
+            <router-link to="/dashboard" class="hover:text-primary-600">
+              {{ isRTL ? 'لوحة التحكم' : 'Dashboard' }}
             </router-link>
             <button @click="handleLogout" class="btn-primary">
               {{ t('nav.logout') }}
             </button>
           </template>
           <template v-else>
-            <router-link to="/login" class="hover:text-primary-600">
-              {{ t('nav.login') }}
-            </router-link>
-            <router-link to="/register" class="btn-primary">
-              {{ t('nav.register') }}
+            <router-link to="/dashboard" class="text-sm hover:text-primary-600">
+              {{ isRTL ? 'لوحة التحكم' : 'Dashboard' }}
             </router-link>
           </template>
         </div>
@@ -71,6 +68,7 @@ const appStore = useAppStore()
 
 const mobileMenuOpen = ref(false)
 const isAuthenticated = computed(() => authStore.isAuthenticated)
+const isAdmin = computed(() => authStore.isAdmin)
 const currentLocale = computed(() => appStore.currentLocale)
 const isRTL = computed(() => appStore.isRTL)
 

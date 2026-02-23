@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.core.database import engine, Base
-from app.api import auth, rooms, products, bookings, payments, reviews
+from app.api import auth, rooms, products, bookings, payments, reviews, stats
 
 # Create tables
 Base.metadata.create_all(bind=engine)
@@ -32,6 +32,7 @@ app.include_router(products.router, prefix="/api")
 app.include_router(bookings.router, prefix="/api")
 app.include_router(payments.router, prefix="/api")
 app.include_router(reviews.router, prefix="/api")
+app.include_router(stats.router, prefix="/api")
 
 @app.get("/")
 def root():
