@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto px-4 py-12">
+  <div class="container mx-auto px-6 max-w-7xl py-12">
     <h1 class="text-4xl font-bold mb-8">{{ isRTL ? 'حسابي' : 'My Account' }}</h1>
 
     <!-- User Info -->
@@ -21,7 +21,7 @@
         <p>{{ t('common.loading') }}</p>
       </div>
 
-      <div v-else-if="bookings.length === 0" class="text-center py-8 text-gray-500">
+      <div v-else-if="bookings.length === 0" class="text-center py-8 text-slate-500">
         <p>{{ isRTL ? 'لا توجد حجوزات' : 'No bookings yet' }}</p>
       </div>
 
@@ -33,21 +33,21 @@
               <p class="font-semibold text-lg">
                 {{ isRTL ? 'حجز رقم' : 'Booking' }} #{{ booking.id }}
               </p>
-              <p class="text-sm text-gray-600">
+              <p class="text-sm text-slate-600">
                 {{ isRTL ? 'النوع' : 'Type' }}: {{ booking.booking_type }}
               </p>
-              <p v-if="booking.check_in" class="text-sm text-gray-600">
+              <p v-if="booking.check_in" class="text-sm text-slate-600">
                 {{ formatDate(booking.check_in) }} - {{ formatDate(booking.check_out!) }}
               </p>
-              <p v-else class="text-sm text-gray-600">
+              <p v-else class="text-sm text-slate-600">
                 {{ formatDate(booking.booking_date!) }}
               </p>
-              <p class="text-sm text-gray-600">
+              <p class="text-sm text-slate-600">
                 {{ isRTL ? 'الضيوف' : 'Guests' }}: {{ booking.guests }}
               </p>
             </div>
             <div class="text-right">
-              <p class="text-xl font-bold text-primary-600">{{ formatPrice(Number(booking.total_price), currentLocale) }}</p>
+              <p class="text-xl font-bold text-slate-900">{{ formatPrice(Number(booking.total_price), currentLocale) }}</p>
               <span :class="getStatusClass(booking.status)" class="text-sm px-2 py-1 rounded">
                 {{ booking.status }}
               </span>
@@ -98,7 +98,7 @@ function getStatusClass(status: string) {
     cancelled: 'bg-red-100 text-red-800',
     completed: 'bg-blue-100 text-blue-800'
   }
-  return classes[status] || 'bg-gray-100 text-gray-800'
+  return classes[status] || 'bg-slate-100 text-slate-800'
 }
 
 onMounted(() => {

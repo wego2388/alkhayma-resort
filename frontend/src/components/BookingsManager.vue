@@ -1,113 +1,213 @@
 <template>
-  <div class="space-y-6">
-    <!-- Filters -->
-    <div class="card">
-      <div class="flex flex-wrap gap-4 items-center">
-        <div class="flex-1 min-w-[200px]">
-          <input 
-            v-model="searchQuery" 
-            type="text" 
-            :placeholder="isRTL ? 'بحث بالاسم أو الإيميل...' : 'Search by name or email...'" 
-            class="input w-full"
-          />
+  <div class="space-y-8">
+    <!-- Header Stats -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div class="group relative bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105 cursor-pointer">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+        <div class="relative">
+          <p class="text-blue-100 text-xs font-semibold uppercase tracking-wider mb-2">{{ isRTL ? 'إجمالي الحجوزات' : 'Total Bookings' }}</p>
+          <p class="text-4xl font-bold">{{ bookings.length }}</p>
         </div>
-        <select v-model="statusFilter" class="input w-48">
+      </div>
+      <div class="group relative bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl p-6 text-white hover:shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 hover:scale-105 cursor-pointer">
+        <div class="absolute inset-0 bg-gradient-to-br from-amber-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+        <div class="relative">
+          <p class="text-amber-100 text-xs font-semibold uppercase tracking-wider mb-2">{{ isRTL ? 'قيد الانتظار' : 'Pending' }}</p>
+          <p class="text-4xl font-bold">{{ bookings.filter(b => b.status === 'pending').length }}</p>
+        </div>
+      </div>
+      <div class="group relative bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-6 text-white hover:shadow-2xl hover:shadow-green-500/50 transition-all duration-300 hover:scale-105 cursor-pointer">
+        <div class="absolute inset-0 bg-gradient-to-br from-green-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+        <div class="relative">
+          <p class="text-green-100 text-xs font-semibold uppercase tracking-wider mb-2">{{ isRTL ? 'مؤكدة' : 'Confirmed' }}</p>
+          <p class="text-4xl font-bold">{{ bookings.filter(b => b.status === 'confirmed').length }}</p>
+        </div>
+      </div>
+      <div class="group relative bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-6 text-white hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 cursor-pointer">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+        <div class="relative">
+          <p class="text-purple-100 text-xs font-semibold uppercase tracking-wider mb-2">{{ isRTL ? 'الإيرادات' : 'Revenue' }}</p>
+          <p class="text-3xl font-bold">${{ totalRevenue.toLocaleString() }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="bg-white rounded-2xl p-6 shadow-lg border border-slate-200/50">
+      <div class="flex flex-wrap items-center gap-4">
+        <div class="flex-1 min-w-[250px]">
+          <div class="relative">
+            <input 
+              v-model="searchQuery" 
+              type="text" 
+              :placeholder="isRTL ? 'بحث بالاسم أو الإيميل...' : 'Search by name or email...'" 
+              class="w-full px-4 py-3 pl-12 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
+            />
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xl">🔍</span>
+          </div>
+        </div>
+        <select v-model="statusFilter" class="px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all">
           <option value="">{{ isRTL ? 'كل الحالات' : 'All Status' }}</option>
-          <option value="pending">Pending</option>
-          <option value="confirmed">Confirmed</option>
-          <option value="cancelled">Cancelled</option>
-          <option value="completed">Completed</option>
+          <option value="pending">{{ isRTL ? 'قيد الانتظار' : 'Pending' }}</option>
+          <option value="confirmed">{{ isRTL ? 'مؤكدة' : 'Confirmed' }}</option>
+          <option value="cancelled">{{ isRTL ? 'ملغاة' : 'Cancelled' }}</option>
+          <option value="completed">{{ isRTL ? 'مكتملة' : 'Completed' }}</option>
         </select>
-        <select v-model="typeFilter" class="input w-48">
+        <select v-model="typeFilter" class="px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all">
           <option value="">{{ isRTL ? 'كل الأنواع' : 'All Types' }}</option>
-          <option value="room">Room</option>
-          <option value="restaurant">Restaurant</option>
-          <option value="cafe">Cafe</option>
-          <option value="water_sports">Water Sports</option>
-          <option value="activities">Activities</option>
-          <option value="beach">Beach</option>
+          <option value="room">{{ isRTL ? 'غرفة' : 'Room' }}</option>
+          <option value="event">{{ isRTL ? 'فعالية' : 'Event' }}</option>
+          <option value="product">{{ isRTL ? 'منتج' : 'Product' }}</option>
+        </select>
+        <select v-model="itemsPerPage" @change="currentPage = 1" class="px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all">
+          <option :value="10">10 / {{ isRTL ? 'صفحة' : 'page' }}</option>
+          <option :value="25">25 / {{ isRTL ? 'صفحة' : 'page' }}</option>
+          <option :value="50">50 / {{ isRTL ? 'صفحة' : 'page' }}</option>
+          <option :value="100">100 / {{ isRTL ? 'صفحة' : 'page' }}</option>
         </select>
       </div>
     </div>
 
+    <!-- Bulk Actions Bar -->
+    <div v-if="selectedBookings.length > 0" class="bg-amber-50 border border-amber-200 rounded-2xl p-4 shadow-lg">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">✓</span>
+          <span class="font-semibold text-slate-900">{{ selectedBookings.length }} {{ isRTL ? 'محدد' : 'selected' }}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button @click="bulkExport" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
+            📥 {{ isRTL ? 'تصدير' : 'Export' }}
+          </button>
+          <button @click="bulkDelete" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors font-medium">
+            🗑️ {{ isRTL ? 'حذف' : 'Delete' }}
+          </button>
+          <button @click="selectedBookings = []" class="px-4 py-2 bg-slate-200 text-slate-700 rounded-lg hover:bg-slate-300 transition-colors font-medium">
+            {{ isRTL ? 'إلغاء' : 'Cancel' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Bookings Table -->
-    <div class="card">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-2xl font-bold">
-          {{ isRTL ? 'جميع الحجوزات' : 'All Bookings' }}
-          <span class="text-primary-600">({{ filteredBookings.length }})</span>
-        </h2>
+    <div class="bg-white rounded-2xl shadow-lg border border-slate-200/50 overflow-hidden">
+      <div class="p-6 border-b border-slate-200">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900">{{ isRTL ? 'جميع الحجوزات' : 'All Bookings' }}</h2>
+            <p class="text-sm text-slate-600 mt-1">
+              {{ isRTL ? 'عرض' : 'Showing' }} {{ (currentPage - 1) * itemsPerPage + 1 }}-{{ Math.min(currentPage * itemsPerPage, sortedBookings.length) }} 
+              {{ isRTL ? 'من' : 'of' }} {{ sortedBookings.length }} {{ isRTL ? 'حجز' : 'bookings' }}
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button @click="exportAllBookings" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-medium flex items-center gap-2">
+              <span>📥</span>
+              <span>{{ isRTL ? 'تصدير الكل' : 'Export All' }}</span>
+            </button>
+            <span class="text-2xl">📋</span>
+          </div>
+        </div>
       </div>
       
       <div class="overflow-x-auto">
         <table class="w-full">
-          <thead class="bg-gradient-to-r from-gray-100 to-gray-200">
+          <thead class="bg-slate-50 border-b border-slate-200">
             <tr>
-              <th class="px-4 py-3 text-left text-sm font-bold">ID</th>
-              <th class="px-4 py-3 text-left text-sm font-bold">{{ isRTL ? 'معلومات الضيف' : 'Guest Info' }}</th>
-              <th class="px-4 py-3 text-left text-sm font-bold">{{ isRTL ? 'النوع' : 'Type' }}</th>
-              <th class="px-4 py-3 text-left text-sm font-bold">{{ isRTL ? 'التاريخ' : 'Date' }}</th>
-              <th class="px-4 py-3 text-left text-sm font-bold">{{ isRTL ? 'السعر' : 'Price' }}</th>
-              <th class="px-4 py-3 text-left text-sm font-bold">{{ isRTL ? 'الحالة' : 'Status' }}</th>
-              <th class="px-4 py-3 text-left text-sm font-bold">{{ isRTL ? 'إجراءات' : 'Actions' }}</th>
+              <th class="px-6 py-4 text-left">
+                <input type="checkbox" v-model="allSelected" class="w-5 h-5 text-amber-500 rounded focus:ring-2 focus:ring-amber-500" />
+              </th>
+              <th @click="sortBy('id')" class="px-6 py-4 text-left text-sm font-semibold text-slate-900 cursor-pointer hover:bg-slate-100 transition-colors">
+                <div class="flex items-center gap-2">
+                  <span>ID</span>
+                  <span v-if="sortField === 'id'">{{ sortOrder === 'asc' ? '↑' : '↓' }}</span>
+                </div>
+              </th>
+              <th @click="sortBy('guest_name')" class="px-6 py-4 text-left text-sm font-semibold text-slate-900 cursor-pointer hover:bg-slate-100 transition-colors">
+                <div class="flex items-center gap-2">
+                  <span>{{ isRTL ? 'معلومات الضيف' : 'Guest Info' }}</span>
+                  <span v-if="sortField === 'guest_name'">{{ sortOrder === 'asc' ? '↑' : '↓' }}</span>
+                </div>
+              </th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-slate-900">{{ isRTL ? 'النوع' : 'Type' }}</th>
+              <th @click="sortBy('booking_date')" class="px-6 py-4 text-left text-sm font-semibold text-slate-900 cursor-pointer hover:bg-slate-100 transition-colors">
+                <div class="flex items-center gap-2">
+                  <span>{{ isRTL ? 'التاريخ' : 'Date' }}</span>
+                  <span v-if="sortField === 'booking_date'">{{ sortOrder === 'asc' ? '↑' : '↓' }}</span>
+                </div>
+              </th>
+              <th @click="sortBy('total_price')" class="px-6 py-4 text-left text-sm font-semibold text-slate-900 cursor-pointer hover:bg-slate-100 transition-colors">
+                <div class="flex items-center gap-2">
+                  <span>{{ isRTL ? 'السعر' : 'Price' }}</span>
+                  <span v-if="sortField === 'total_price'">{{ sortOrder === 'asc' ? '↑' : '↓' }}</span>
+                </div>
+              </th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-slate-900">{{ isRTL ? 'الحالة' : 'Status' }}</th>
+              <th class="px-6 py-4 text-center text-sm font-semibold text-slate-900">{{ isRTL ? 'الإجراءات' : 'Actions' }}</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-gray-200">
-            <tr v-for="booking in paginatedBookings" :key="booking.id" class="hover:bg-gray-50 transition-colors">
-              <td class="px-4 py-4">
-                <span class="font-mono text-sm font-bold text-primary-600 bg-primary-50 px-2 py-1 rounded">#{{ booking.id }}</span>
-              </td>
-              <td class="px-4 py-4">
-                <div v-if="booking.special_requests" class="text-sm">
-                  <div class="font-bold text-gray-900">{{ extractGuestName(booking.special_requests) }}</div>
-                  <div class="text-gray-600 text-xs">📧 {{ extractGuestEmail(booking.special_requests) }}</div>
-                  <div class="text-gray-500 text-xs">📱 {{ extractGuestPhone(booking.special_requests) }}</div>
+          <tbody class="divide-y divide-slate-100">
+            <tr v-if="loading">
+              <td colspan="8" class="px-6 py-12 text-center">
+                <div class="flex items-center justify-center gap-3">
+                  <div class="w-6 h-6 border-3 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+                  <span class="text-slate-600">{{ isRTL ? 'جاري التحميل...' : 'Loading...' }}</span>
                 </div>
-                <div v-else class="text-gray-400 text-sm">User #{{ booking.user_id }}</div>
               </td>
-              <td class="px-4 py-4">
-                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold flex items-center gap-1 w-fit">
-                  <span>{{ getTypeIcon(booking.booking_type) }}</span>
+            </tr>
+            <tr v-else-if="paginatedBookings.length === 0">
+              <td colspan="8" class="px-6 py-12 text-center text-slate-500">
+                <div class="text-6xl mb-4">📋</div>
+                {{ isRTL ? 'لا توجد حجوزات' : 'No bookings found' }}
+              </td>
+            </tr>
+            <tr v-else v-for="booking in paginatedBookings" :key="booking.id" class="hover:bg-slate-50 transition-colors">
+              <td class="px-6 py-4">
+                <input type="checkbox" :value="booking.id" v-model="selectedBookings" class="w-5 h-5 text-amber-500 rounded focus:ring-2 focus:ring-amber-500" />
+              </td>
+              <td class="px-6 py-4">
+                <span class="font-mono text-sm font-semibold text-slate-900">#{{ booking.id }}</span>
+              </td>
+              <td class="px-6 py-4">
+                <div>
+                  <p class="font-semibold text-slate-900">{{ booking.guest_name }}</p>
+                  <p class="text-sm text-slate-600">{{ booking.guest_email }}</p>
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
                   {{ booking.booking_type }}
                 </span>
               </td>
-              <td class="px-4 py-4 text-sm text-gray-700">
-                <div>📅 {{ formatDate(booking.booking_date) }}</div>
-                <div class="text-xs text-gray-500">🕐 {{ formatTime(booking.booking_date) }}</div>
+              <td class="px-6 py-4 text-slate-600">
+                {{ formatDate(booking.booking_date) }}
               </td>
-              <td class="px-4 py-4">
-                <span class="font-bold text-lg text-gray-900">${{ Number(booking.total_price).toLocaleString() }}</span>
+              <td class="px-6 py-4 font-semibold text-slate-900">
+                ${{ booking.total_price }}
               </td>
-              <td class="px-4 py-4">
-                <span :class="getStatusClass(booking.status)" class="px-3 py-1 rounded-full text-xs font-bold uppercase">
+              <td class="px-6 py-4">
+                <span 
+                  :class="{
+                    'bg-amber-100 text-amber-700': booking.status === 'pending',
+                    'bg-green-100 text-green-700': booking.status === 'confirmed',
+                    'bg-red-100 text-red-700': booking.status === 'cancelled',
+                    'bg-blue-100 text-blue-700': booking.status === 'completed'
+                  }"
+                  class="px-3 py-1 rounded-full text-sm font-medium"
+                >
                   {{ booking.status }}
                 </span>
               </td>
-              <td class="px-4 py-4">
-                <div class="flex gap-2">
-                  <button 
-                    v-if="booking.status === 'pending'"
-                    @click="updateStatus(booking.id, 'confirmed')" 
-                    class="px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 text-xs font-semibold transition-all hover:scale-105"
-                    title="Confirm"
-                  >
-                    ✓
+              <td class="px-6 py-4">
+                <div class="flex items-center justify-center gap-2">
+                  <button @click="viewBooking(booking)" class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors" title="View">
+                    👁️
                   </button>
-                  <button 
-                    v-if="booking.status === 'confirmed'"
-                    @click="updateStatus(booking.id, 'completed')" 
-                    class="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-xs font-semibold transition-all hover:scale-105"
-                    title="Complete"
-                  >
-                    ✓✓
+                  <button v-if="booking.status === 'pending'" @click="confirmBooking(booking)" class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors" title="Confirm">
+                    ✅
                   </button>
-                  <button 
-                    v-if="booking.status !== 'cancelled'"
-                    @click="updateStatus(booking.id, 'cancelled')" 
-                    class="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 text-xs font-semibold transition-all hover:scale-105"
-                    title="Cancel"
-                  >
-                    ✕
+                  <button v-if="booking.status !== 'cancelled'" @click="cancelBooking(booking)" class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Cancel">
+                    ❌
                   </button>
                 </div>
               </td>
@@ -117,22 +217,28 @@
       </div>
 
       <!-- Pagination -->
-      <div v-if="totalPages > 1" class="flex justify-center items-center gap-2 mt-6">
-        <button 
-          @click="currentPage--" 
-          :disabled="currentPage === 1"
-          class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          ←
-        </button>
-        <span class="px-4 py-2 font-semibold">{{ currentPage }} / {{ totalPages }}</span>
-        <button 
-          @click="currentPage++" 
-          :disabled="currentPage === totalPages"
-          class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          →
-        </button>
+      <div v-if="totalPages > 1" class="p-6 border-t border-slate-200">
+        <div class="flex items-center justify-between">
+          <button @click="currentPage--" :disabled="currentPage === 1" class="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed">
+            {{ isRTL ? 'السابق' : 'Previous' }}
+          </button>
+          
+          <div class="flex items-center gap-2">
+            <button 
+              v-for="page in visiblePages" 
+              :key="page"
+              @click="currentPage = page"
+              :class="currentPage === page ? 'bg-amber-500 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'"
+              class="w-10 h-10 rounded-lg font-semibold transition-colors"
+            >
+              {{ page }}
+            </button>
+          </div>
+          
+          <button @click="currentPage++" :disabled="currentPage === totalPages" class="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed">
+            {{ isRTL ? 'التالي' : 'Next' }}
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -142,112 +248,191 @@
 import { ref, computed, onMounted } from 'vue'
 import { useAppStore } from '@/stores/app'
 import { useToast } from '@/composables/useToast'
-import apiClient from '@/api/client'
+import { bookingsApi } from '@/api'
+import type { Booking } from '@/types'
 
 const appStore = useAppStore()
 const toast = useToast()
 const isRTL = computed(() => appStore.isRTL)
 
-const bookings = ref<any[]>([])
+const bookings = ref<Booking[]>([])
+const loading = ref(false)
 const searchQuery = ref('')
 const statusFilter = ref('')
 const typeFilter = ref('')
+const selectedBookings = ref<number[]>([])
 const currentPage = ref(1)
-const perPage = 10
+const itemsPerPage = ref(25)
+const sortField = ref('id')
+const sortOrder = ref<'asc' | 'desc'>('desc')
 
 const filteredBookings = computed(() => {
-  let result = bookings.value
-
-  if (searchQuery.value) {
-    const query = searchQuery.value.toLowerCase()
-    result = result.filter(b => 
-      b.special_requests?.toLowerCase().includes(query)
-    )
-  }
-
-  if (statusFilter.value) {
-    result = result.filter(b => b.status === statusFilter.value)
-  }
-
-  if (typeFilter.value) {
-    result = result.filter(b => b.booking_type === typeFilter.value)
-  }
-
-  return result
+  return bookings.value.filter(booking => {
+    const matchesSearch = !searchQuery.value || 
+      booking.guest_name?.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      booking.guest_email?.toLowerCase().includes(searchQuery.value.toLowerCase())
+    
+    const matchesStatus = !statusFilter.value || booking.status === statusFilter.value
+    const matchesType = !typeFilter.value || booking.booking_type === typeFilter.value
+    
+    return matchesSearch && matchesStatus && matchesType
+  })
 })
 
-const totalPages = computed(() => Math.ceil(filteredBookings.value.length / perPage))
+const sortedBookings = computed(() => {
+  const sorted = [...filteredBookings.value]
+  sorted.sort((a, b) => {
+    const aVal = a[sortField.value as keyof Booking]
+    const bVal = b[sortField.value as keyof Booking]
+    
+    if (aVal < bVal) return sortOrder.value === 'asc' ? -1 : 1
+    if (aVal > bVal) return sortOrder.value === 'asc' ? 1 : -1
+    return 0
+  })
+  return sorted
+})
 
 const paginatedBookings = computed(() => {
-  const start = (currentPage.value - 1) * perPage
-  return filteredBookings.value.slice(start, start + perPage)
+  const start = (currentPage.value - 1) * itemsPerPage.value
+  const end = start + itemsPerPage.value
+  return sortedBookings.value.slice(start, end)
 })
 
-async function loadBookings() {
-  try {
-    const response = await apiClient.get('/api/bookings')
-    bookings.value = response.data
-  } catch (error) {
-    toast.error(isRTL.value ? 'فشل التحميل' : 'Failed to load')
+const totalPages = computed(() => {
+  return Math.ceil(sortedBookings.value.length / itemsPerPage.value)
+})
+
+const allSelected = computed({
+  get: () => paginatedBookings.value.length > 0 && paginatedBookings.value.every(b => selectedBookings.value.includes(b.id)),
+  set: (value) => {
+    if (value) {
+      selectedBookings.value = paginatedBookings.value.map(b => b.id)
+    } else {
+      selectedBookings.value = []
+    }
   }
-}
+})
 
-async function updateStatus(bookingId: number, status: string) {
-  try {
-    await apiClient.put(`/api/bookings/${bookingId}`, { status })
-    toast.success(isRTL.value ? 'تم التحديث' : 'Updated')
-    loadBookings()
-  } catch (error) {
-    toast.error(isRTL.value ? 'فشل التحديث' : 'Failed to update')
+const totalRevenue = computed(() => {
+  return bookings.value.reduce((sum, b) => sum + (b.total_price || 0), 0)
+})
+
+const visiblePages = computed(() => {
+  const pages = []
+  const maxVisible = 5
+  let start = Math.max(1, currentPage.value - Math.floor(maxVisible / 2))
+  let end = Math.min(totalPages.value, start + maxVisible - 1)
+  
+  if (end - start < maxVisible - 1) {
+    start = Math.max(1, end - maxVisible + 1)
   }
-}
-
-function extractGuestName(sr: string) {
-  const match = sr.match(/Guest: (.+?),/)
-  return match ? match[1] : 'N/A'
-}
-
-function extractGuestEmail(sr: string) {
-  const match = sr.match(/Email: (.+?),/)
-  return match ? match[1] : 'N/A'
-}
-
-function extractGuestPhone(sr: string) {
-  const match = sr.match(/Phone: (.+?)(?:,|$)/)
-  return match ? match[1] : 'N/A'
-}
+  
+  for (let i = start; i <= end; i++) {
+    pages.push(i)
+  }
+  return pages
+})
 
 function formatDate(date: string) {
-  return new Date(date).toLocaleDateString(isRTL.value ? 'ar-SA' : 'en-US')
-}
-
-function formatTime(date: string) {
-  return new Date(date).toLocaleTimeString(isRTL.value ? 'ar-SA' : 'en-US', { 
-    hour: '2-digit', 
-    minute: '2-digit' 
+  return new Date(date).toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'short', 
+    day: 'numeric' 
   })
 }
 
-function getStatusClass(status: string) {
-  const classes: Record<string, string> = {
-    pending: 'bg-yellow-100 text-yellow-800 border border-yellow-300',
-    confirmed: 'bg-green-100 text-green-800 border border-green-300',
-    cancelled: 'bg-red-100 text-red-800 border border-red-300',
-    completed: 'bg-blue-100 text-blue-800 border border-blue-300'
+function sortBy(field: string) {
+  if (sortField.value === field) {
+    sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc'
+  } else {
+    sortField.value = field
+    sortOrder.value = 'asc'
   }
-  return classes[status] || 'bg-gray-100 text-gray-800'
 }
 
-function getTypeIcon(type: string) {
-  const icons: Record<string, string> = {
-    room: '🏨',
-    restaurant: '🍽️',
-    cafe: '☕',
-    water_sports: '🏄',
-    activities: '🎯',
-    beach: '🏖️'
+async function bulkDelete() {
+  if (!confirm(isRTL.value ? `هل أنت متأكد من حذف ${selectedBookings.value.length} حجز؟` : `Delete ${selectedBookings.value.length} bookings?`)) return
+  
+  try {
+    await Promise.all(selectedBookings.value.map(id => bookingsApi.delete(id)))
+    toast.success(isRTL.value ? '✅ تم الحذف' : '✅ Deleted')
+    selectedBookings.value = []
+    loadBookings()
+  } catch (error) {
+    toast.error(isRTL.value ? '❌ فشل الحذف' : '❌ Failed to delete')
   }
-  return icons[type] || '📦'
+}
+
+function bulkExport() {
+  const selected = bookings.value.filter(b => selectedBookings.value.includes(b.id))
+  exportBookings(selected)
+}
+
+function exportAllBookings() {
+  exportBookings(sortedBookings.value)
+}
+
+function exportBookings(data: Booking[]) {
+  const csvData = [
+    ['ID', 'Guest Name', 'Email', 'Type', 'Date', 'Price', 'Status'],
+    ...data.map(b => [
+      b.id,
+      b.guest_name,
+      b.guest_email,
+      b.booking_type,
+      b.booking_date,
+      b.total_price,
+      b.status
+    ])
+  ]
+  
+  const csv = csvData.map(row => row.join(',')).join('\n')
+  const blob = new Blob([csv], { type: 'text/csv' })
+  const url = window.URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `bookings-${new Date().toISOString().split('T')[0]}.csv`
+  a.click()
+  window.URL.revokeObjectURL(url)
+  
+  toast.success(isRTL.value ? '✅ تم التصدير' : '✅ Exported')
+}
+
+async function loadBookings() {
+  try {
+    loading.value = true
+    bookings.value = await bookingsApi.getAll()
+  } catch (error) {
+    toast.error(isRTL.value ? 'فشل تحميل الحجوزات' : 'Failed to load bookings')
+  } finally {
+    loading.value = false
+  }
+}
+
+function viewBooking(booking: Booking) {
+  alert(`Booking #${booking.id}\nGuest: ${booking.guest_name}\nType: ${booking.booking_type}\nPrice: $${booking.total_price}`)
+}
+
+async function confirmBooking(booking: Booking) {
+  try {
+    await bookingsApi.update(booking.id, { status: 'confirmed' })
+    toast.success(isRTL.value ? 'تم تأكيد الحجز' : 'Booking confirmed')
+    loadBookings()
+  } catch (error) {
+    toast.error(isRTL.value ? 'فشل التأكيد' : 'Failed to confirm')
+  }
+}
+
+async function cancelBooking(booking: Booking) {
+  if (!confirm(isRTL.value ? 'هل أنت متأكد من إلغاء الحجز؟' : 'Are you sure you want to cancel this booking?')) return
+  
+  try {
+    await bookingsApi.update(booking.id, { status: 'cancelled' })
+    toast.success(isRTL.value ? 'تم إلغاء الحجز' : 'Booking cancelled')
+    loadBookings()
+  } catch (error) {
+    toast.error(isRTL.value ? 'فشل الإلغاء' : 'Failed to cancel')
+  }
 }
 
 onMounted(() => {

@@ -1,0 +1,160 @@
+{
+  "brand": {
+    "name": "El Kheima Beach Resort",
+    "location": "Sharm El Sheikh, Egypt",
+    "positioning": "Private Beachfront Resort for Couples & Families",
+    "tone": "Elegant, Relaxed, Premium, Warm",
+    "airport_distance_minutes": 20,
+    "nearby_attractions": [
+      "Ras Mohammed National Park - 24km",
+      "Ghibli Raceway - 15 minutes"
+    ]
+  },
+
+  "hero_content": {
+    "headline_variants_en": [
+      "Escape to a Private Beach Paradise",
+      "Wake Up Steps from the Red Sea",
+      "Where Sea, Comfort & Romance Meet"
+    ],
+    "headline_variants_ar": [
+      "استمتع بإقامة على شاطئ خاص في شرم الشيخ",
+      "استيقظ على إطلالة مباشرة على البحر الأحمر",
+      "حيث يلتقي البحر بالراحة والرومانسية"
+    ],
+    "subheadline_en": "A beachfront retreat designed for unforgettable moments.",
+    "subheadline_ar": "منتجع مواجه للشاطئ مصمم لذكريات لا تُنسى.",
+    "primary_cta_en": "Book Your Stay",
+    "primary_cta_ar": "احجز إقامتك",
+    "urgency_microcopy_en": "Limited sea view rooms available this season.",
+    "urgency_microcopy_ar": "عدد محدود من الغرف المطلة على البحر هذا الموسم."
+  },
+
+  "rooms": [
+    {
+      "slug": "double-sea-view",
+      "name_en": "Double Room with Sea View",
+      "name_ar": "غرفة مزدوجة بإطلالة على البحر",
+      "target_audience": "Couples",
+      "max_guests": 2,
+      "beds": "1 King Bed",
+      "experience_angle_en": "Romantic mornings overlooking the Red Sea.",
+      "experience_angle_ar": "صباح رومانسي بإطلالة على البحر الأحمر.",
+      "highlights": [
+        "Private balcony",
+        "Direct beach access",
+        "Air conditioning",
+        "Flat-screen TV",
+        "Kitchenette"
+      ],
+      "conversion_triggers": [
+        "Most booked by couples",
+        "Perfect for honeymoon stays",
+        "Sunset balcony experience"
+      ]
+    },
+    {
+      "slug": "family-room",
+      "name_en": "Family Room",
+      "name_ar": "غرفة عائلية",
+      "target_audience": "Families",
+      "max_guests": 5,
+      "beds": "2 Double Beds + Sofa",
+      "experience_angle_en": "Spacious comfort just steps from the beach.",
+      "experience_angle_ar": "مساحة مريحة للعائلة على بعد خطوات من الشاطئ.",
+      "highlights": [
+        "Large layout",
+        "Beach access included",
+        "Family-friendly setup"
+      ],
+      "conversion_triggers": [
+        "Ideal for family vacations",
+        "Safe sandy beach for kids"
+      ]
+    }
+  ],
+
+  "beach_experience": {
+    "headline_en": "Your Private Beach Experience",
+    "headline_ar": "تجربة شاطئ خاص لك فقط",
+    "features": [
+      "Private sandy beach",
+      "Beach bar",
+      "Sunset seating",
+      "Family play zone",
+      "Water sports activities"
+    ],
+    "marketing_angles": [
+      "Steps from your room to the sea",
+      "Exclusive beachfront privacy",
+      "Romantic sunset dinners by the water"
+    ]
+  },
+
+  "restaurant": {
+    "name": "Italian Restaurant",
+    "description_en": "Authentic Italian dining overlooking the sea.",
+    "description_ar": "مطعم إيطالي أصيل بإطلالة مباشرة على البحر.",
+    "atmosphere": [
+      "Romantic",
+      "Family Friendly",
+      "Traditional"
+    ],
+    "upsell_hooks": [
+      "Candlelight beach dinner",
+      "Sunset romantic setup"
+    ]
+  },
+
+  "water_sports": {
+    "headline_en": "Adventure on the Red Sea",
+    "headline_ar": "مغامرات في البحر الأحمر",
+    "activities": [
+      "Snorkeling",
+      "Diving",
+      "Jet Ski",
+      "Boat trips"
+    ],
+    "marketing_hook_en": "Add excitement to your beach escape.",
+    "marketing_hook_ar": "أضف روح المغامرة إلى إقامتك."
+  },
+
+  "social_proof": {
+    "overall_rating": 4.7,
+    "ranking": "Ranked #1 of 8 in the area",
+    "scores": {
+      "location": 4.9,
+      "cleanliness": 4.9,
+      "service": 4.9,
+      "sleep_quality": 4.9
+    },
+    "review_highlights": [
+      "Loved by couples",
+      "Top rated for location",
+      "Exceptional cleanliness"
+    ]
+  },
+
+  "seo": {
+    "primary_keywords_en": [
+      "Sharm El Sheikh Beach Resort",
+      "Private Beach Hotel Sharm",
+      "Sea View Rooms Sharm",
+      "Romantic Resort in Sharm"
+    ],
+    "primary_keywords_ar": [
+      "منتجع شرم الشيخ على البحر",
+      "فندق شاطئ خاص شرم",
+      "غرف مطلة على البحر شرم الشيخ"
+    ],
+    "meta_description_en": "Private beachfront resort in Sharm El Sheikh offering sea view rooms, Italian dining, spa, and water sports.",
+    "meta_description_ar": "منتجع مواجه للشاطئ في شرم الشيخ يوفر غرف مطلة على البحر ومطعم إيطالي وسبا وأنشطة بحرية."
+  },
+
+  "cta_variants": {
+    "romantic_en": "Plan Your Romantic Escape",
+    "family_en": "Start Your Family Vacation",
+    "adventure_en": "Book Your Beach Adventure",
+    "arabic_primary": "ابدأ رحلتك الآن"
+  }
+}

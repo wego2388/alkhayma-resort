@@ -1,97 +1,70 @@
 <template>
-  <div class="container mx-auto px-4 py-12">
-    <div v-if="loading" class="text-center py-12">
-      <p class="text-xl">{{ t('common.loading') }}</p>
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 to-white">
+    <!-- Loading State -->
+    <div v-if="loading" class="flex items-center justify-center min-h-screen">
+      <div class="text-center">
+        <div class="inline-block animate-spin rounded-full h-16 w-16 border-4 border-amber-500 border-t-transparent mb-4"></div>
+        <p class="text-xl text-slate-600">{{ t('common.loading') }}</p>
+      </div>
     </div>
 
-    <div v-else-if="room" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <!-- Room Image -->
-      <div>
-        <img :src="room.image_url || 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800'" 
-          :alt="displayName" class="w-full h-96 object-cover rounded-lg shadow-lg" />
-      </div>
+    <!-- Room Content -->
+    <div v-else-if="room">
+      <!-- Hero Image -->
+      <section class="relative h-[60vh]">
+        <img 
+          :src="room.image_url || 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=2070'" 
+          :alt="displayName" 
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+        
+        <!-- Room Title Overlay -->
+        <div class="absolute bottom-0 left-0 right-0 p-12">
+          <div class="container mx-auto max-w-7xl">
+            <h1 class="font-display text-5xl md:text-6xl font-bold text-white mb-4">{{ displayName }}</h1>
+            <div class="flex items-center gap-6 text-white/90">
+              <span class="flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+                {{ room.capacity }} {{ isRTL ? 'أشخاص' : 'Guests' }}
+              </span>
+              <span class="text-3xl font-bold text-amber-400">{{ formatPrice(Number(room.base_price), currentLocale) }}</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- Room Details -->
-      <div>
-        <h1 class="text-4xl font-bold mb-4">{{ displayName }}</h1>
-        <p class="text-gray-600 mb-6">{{ displayDescription }}</p>
+      <section class="py-24">
+        <div class="container mx-auto px-6 max-w-7xl">
+          <div class="grid lg:grid-cols-3 gap-12">
+            <div class="lg:col-span-2">
+              <h2 class="text-3xl font-bold mb-6">{{ isRTL ? 'تفاصيل الغرفة' : 'Room Details' }}</h2>
+              <p class="text-slate-600 text-lg">{{ isRTL ? room?.description_ar : room?.description }}</p>
+            </div>
+            
+            <div class="bg-slate-50 rounded-3xl p-8">
+              <h3 class="text-2xl font-bold mb-6">{{ isRTL ? 'احجز الآن' : 'Book Now' }}</h3>
+              <form @submit.prevent="handleBooking">
+                <div class="mb-4">
+                  <label class="block mb-2 font-medium">{{ t('booking.specialRequests') }}</label>
+                  <textarea v-model="specialRequests" class="input w-full" rows="3"></textarea>
+                </div>
 
-        <div class="space-y-4 mb-6">
-          <div class="flex items-center gap-2">
-            <span class="font-semibold">{{ t('rooms.capacity') }}:</span>
-            <span>{{ room.capacity }} {{ isRTL ? 'أشخاص' : 'guests' }}</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="font-semibold">{{ t('rooms.price') }}:</span>
-            <span class="text-2xl text-primary-600 font-bold">{{ formatPrice(Number(room.base_price), currentLocale) }}</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="font-semibold">{{ isRTL ? 'النوع' : 'Type' }}:</span>
-            <span class="capitalize">{{ room.type }}</span>
-          </div>
-        </div>
+                <div v-if="totalPrice > 0" class="text-xl font-bold mb-4">
+                  {{ t('booking.total') }}: {{ formatPrice(totalPrice, currentLocale) }}
+                </div>
 
-        <!-- Amenities -->
-        <div class="mb-6">
-          <h3 class="font-semibold mb-3">{{ isRTL ? 'المرافق' : 'Amenities' }}</h3>
-          <div class="flex flex-wrap gap-2">
-            <span v-for="amenity in room.amenities" :key="amenity"
-              class="px-3 py-1 bg-gray-100 rounded-full text-sm">
-              {{ amenity }}
-            </span>
+                <button type="submit" :disabled="bookingLoading" class="btn-primary w-full">
+                  {{ bookingLoading ? t('common.loading') : t('booking.confirm') }}
+                </button>
+              </form>
+            </div>
           </div>
         </div>
-
-        <!-- Booking Form -->
-        <div class="card bg-gray-50">
-          <h3 class="text-xl font-bold mb-4">{{ t('booking.title') }}</h3>
-          <form @submit.prevent="handleBooking" class="space-y-4">
-            <div>
-              <label class="block mb-2 font-medium">{{ isRTL ? 'الاسم الكامل' : 'Full Name' }}</label>
-              <input v-model="guestName" type="text" required class="input" />
-            </div>
-
-            <div>
-              <label class="block mb-2 font-medium">{{ isRTL ? 'البريد الإلكتروني' : 'Email' }}</label>
-              <input v-model="guestEmail" type="email" required class="input" />
-            </div>
-
-            <div>
-              <label class="block mb-2 font-medium">{{ isRTL ? 'رقم الهاتف' : 'Phone' }}</label>
-              <input v-model="guestPhone" type="tel" required class="input" />
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <label class="block mb-2 font-medium">{{ t('booking.checkIn') }}</label>
-                <input v-model="checkIn" type="date" required class="input" :min="today" />
-              </div>
-              <div>
-                <label class="block mb-2 font-medium">{{ t('booking.checkOut') }}</label>
-                <input v-model="checkOut" type="date" required class="input" :min="checkIn || today" />
-              </div>
-            </div>
-
-            <div>
-              <label class="block mb-2 font-medium">{{ t('booking.guests') }}</label>
-              <input v-model.number="guests" type="number" :max="room.capacity" min="1" required class="input" />
-            </div>
-
-            <div>
-              <label class="block mb-2 font-medium">{{ t('booking.specialRequests') }}</label>
-              <textarea v-model="specialRequests" class="input" rows="3"></textarea>
-            </div>
-
-            <div v-if="totalPrice > 0" class="text-xl font-bold">
-              {{ t('booking.total') }}: {{ formatPrice(totalPrice, currentLocale) }}
-            </div>
-
-            <button type="submit" :disabled="bookingLoading" class="btn-primary w-full">
-              {{ bookingLoading ? t('common.loading') : t('booking.confirm') }}
-            </button>
-          </form>
-        </div>
-      </div>
+      </section>
     </div>
   </div>
 </template>

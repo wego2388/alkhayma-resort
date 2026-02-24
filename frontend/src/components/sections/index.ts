@@ -1,0 +1,6 @@
+export { default as LocationSection } from './LocationSection.vue'
+export { default as ReviewsSection } from './ReviewsSection.vue'
+export { default as SocialMediaSection } from './SocialMediaSection.vue'
+export { default as StatsSection } from './StatsSection.vue'
+export { default as FeaturesSection } from './FeaturesSection.vue'
+export { default as CTASection } from './CTASection.vue'

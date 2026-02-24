@@ -1,37 +1,34 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-primary-100 py-12 px-4">
+  <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50 py-12 px-6">
     <div class="max-w-md w-full">
       <!-- Logo/Title -->
       <div class="text-center mb-8">
-        <h1 class="text-4xl font-bold text-primary-600 mb-2">
-          {{ isRTL ? 'الخيمة' : 'Al Khayma' }}
+        <h1 class="font-display text-5xl font-bold text-slate-900 mb-2">
+          {{ isRTL ? 'الخيمة' : 'El Kheima' }}
         </h1>
-        <p class="text-gray-600">{{ isRTL ? 'لوحة تحكم الأدمن' : 'Admin Dashboard' }}</p>
+        <p class="text-slate-600">{{ isRTL ? 'لوحة تحكم الأدمن' : 'Admin Dashboard' }}</p>
       </div>
 
-      <div class="card shadow-xl">
-        <h2 class="text-2xl font-bold mb-6 text-center">{{ t('auth.login') }}</h2>
+      <div class="bg-white rounded-3xl shadow-luxury-lg p-8">
+        <h2 class="font-display text-3xl font-bold mb-6 text-center text-slate-900">{{ t('auth.login') }}</h2>
 
-        <form @submit.prevent="handleLogin" class="space-y-4">
+        <form @submit.prevent="handleLogin" class="space-y-6">
           <div>
-            <label class="block mb-2 font-medium text-gray-700">
-              <span class="flex items-center gap-2">
-                <span>📧</span>
-                <span>{{ t('auth.email') }}</span>
-              </span>
+            <label class="block mb-2 font-semibold text-slate-700">
+              {{ t('auth.email') }}
             </label>
             <input 
               v-model="email" 
               type="email" 
               required 
-              class="input"
+              class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all outline-none"
               placeholder="admin@alkhayma.com"
               autocomplete="email"
             />
           </div>
 
           <div>
-            <label class="block mb-2 font-medium text-gray-700">
+            <label class="block mb-2 font-medium text-slate-700">
               <span class="flex items-center gap-2">
                 <span>🔒</span>
                 <span>{{ t('auth.password') }}</span>
@@ -48,7 +45,7 @@
             <button 
               type="button" 
               @click="showPassword = !showPassword"
-              class="text-sm text-primary-600 hover:underline mt-1"
+              class="text-sm text-slate-900 hover:underline mt-1"
             >
               {{ showPassword ? (isRTL ? 'إخفاء' : 'Hide') : (isRTL ? 'إظهار' : 'Show') }}
             </button>
@@ -61,7 +58,7 @@
           <button 
             type="submit" 
             :disabled="authStore.loading" 
-            class="btn-primary w-full py-3 text-lg"
+            class="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
           >
             <span v-if="authStore.loading">⏳ {{ t('common.loading') }}</span>
             <span v-else>🔓 {{ t('auth.submit') }}</span>
@@ -82,7 +79,7 @@
 
       <!-- Back to Home -->
       <div class="text-center mt-6">
-        <router-link to="/" class="text-gray-600 hover:text-primary-600 transition-colors">
+        <router-link to="/" class="text-slate-600 hover:text-slate-900 transition-colors">
           ← {{ isRTL ? 'العودة للرئيسية' : 'Back to Home' }}
         </router-link>
       </div>

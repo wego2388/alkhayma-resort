@@ -33,9 +33,9 @@
         </button>
       </form>
 
-      <p class="mt-4 text-center text-gray-600">
+      <p class="mt-4 text-center text-slate-600">
         {{ isRTL ? 'لديك حساب؟' : 'Already have an account?' }}
-        <router-link to="/login" class="text-primary-600 hover:underline">
+        <router-link to="/login" class="text-slate-900 hover:underline">
           {{ t('auth.login') }}
         </router-link>
       </p>

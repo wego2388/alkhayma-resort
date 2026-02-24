@@ -1,0 +1,10 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallow admin pages
+Disallow: /dashboard
+Disallow: /account
+
+# Sitemap
+Sitemap: https://alkhaymaresort.com/sitemap.xml

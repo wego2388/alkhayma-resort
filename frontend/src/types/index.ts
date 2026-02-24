@@ -37,6 +37,25 @@ export interface Product {
   created_at: string
 }
 
+export interface Event {
+  id: number
+  name: string
+  name_ar: string
+  description?: string
+  description_ar?: string
+  category: string
+  price: number
+  image_url?: string
+  duration?: number
+  schedule_time?: string
+  schedule_days?: string
+  max_guests?: number
+  location?: string
+  location_ar?: string
+  is_active: boolean
+  created_at: string
+}
+
 export interface Booking {
   id: number
   user_id: number

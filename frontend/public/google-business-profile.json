@@ -1,0 +1,274 @@
+{
+  "businessName": "Al Khayma Resort | منتجع الخيمة",
+  "category": {
+    "primary": "Beach Resort",
+    "secondary": ["Hotel", "Italian Restaurant", "Wedding Venue", "Spa"]
+  },
+  "description": {
+    "en": "Al Khayma Resort offers luxury beachfront accommodations on a private beach in Sharm El Sheikh. Experience world-class Italian dining, premium spa services, and unforgettable Red Sea adventures. Perfect for romantic getaways, family vacations, and destination weddings.\n\n✨ Private Beach Access\n🍝 Authentic Italian Restaurant\n🏊 Infinity Pool & Spa\n🤿 Diving & Water Sports\n💒 Wedding & Event Venue\n🌅 Stunning Red Sea Views\n👨‍👩‍👧‍👦 Family Friendly\n🎯 All-Inclusive Packages",
+    "ar": "منتجع الخيمة يقدم إقامة فاخرة على شاطئ خاص في شرم الشيخ. استمتع بمطعم إيطالي عالمي، خدمات سبا فاخرة، ومغامرات البحر الأحمر. مثالي للعطلات الرومانسية، العائلية، وحفلات الزفاف.\n\n✨ شاطئ خاص\n🍝 مطعم إيطالي أصيل\n🏊 مسبح لا متناهي وسبا\n🤿 غوص ورياضات مائية\n💒 قاعات أفراح وفعاليات\n🌅 إطلالات خلابة على البحر الأحمر\n👨‍👩‍👧‍👦 مناسب للعائلات\n🎯 عروض شاملة كليًا"
+  },
+  "keywords": {
+    "primary": [
+      "Sharm El Sheikh Private Beach",
+      "Beachfront Resort Sharm El Sheikh",
+      "Italian Restaurant Sharm El Sheikh",
+      "منتجع الخيمة شرم الشيخ",
+      "شاطئ خاص شرم الشيخ"
+    ],
+    "secondary": [
+      "Luxury Beach Hotel Red Sea",
+      "Private Beach Sharm Egypt",
+      "Sharm El Sheikh Wedding Venue",
+      "Red Sea Diving Resort",
+      "Sharm El Sheikh Spa Resort",
+      "Family Beach Resort Egypt",
+      "Romantic Getaway Sharm",
+      "Corporate Events Sharm El Sheikh",
+      "All Inclusive Resort Sharm",
+      "Beachfront Italian Restaurant"
+    ]
+  },
+  "attributes": [
+    "Beachfront",
+    "Private beach",
+    "Free WiFi",
+    "Free parking",
+    "Pool",
+    "Spa",
+    "Restaurant",
+    "Bar",
+    "Room service",
+    "Airport shuttle",
+    "Wedding services",
+    "Pet friendly",
+    "Family friendly",
+    "Wheelchair accessible",
+    "Fitness center",
+    "Business center",
+    "Concierge",
+    "Laundry service",
+    "24-hour front desk",
+    "Non-smoking rooms",
+    "Diving center",
+    "Water sports",
+    "Kids club",
+    "Entertainment",
+    "Live music"
+  ],
+  "services": [
+    {
+      "name": "Accommodation",
+      "items": [
+        "Standard Rooms",
+        "Deluxe Suites",
+        "Presidential Suite",
+        "Family Rooms",
+        "Honeymoon Suites"
+      ]
+    },
+    {
+      "name": "Dining",
+      "items": [
+        "Italian Restaurant",
+        "Beach Bar",
+        "Pool Bar",
+        "Room Service",
+        "Private Dining",
+        "Breakfast Buffet"
+      ]
+    },
+    {
+      "name": "Activities",
+      "items": [
+        "Scuba Diving",
+        "Snorkeling",
+        "Water Sports",
+        "Desert Safari",
+        "Boat Tours",
+        "Fishing Trips"
+      ]
+    },
+    {
+      "name": "Wellness",
+      "items": [
+        "Spa Treatments",
+        "Massage Therapy",
+        "Fitness Center",
+        "Yoga Classes",
+        "Sauna & Steam Room"
+      ]
+    },
+    {
+      "name": "Events",
+      "items": [
+        "Weddings",
+        "Corporate Events",
+        "Conferences",
+        "Private Parties",
+        "Team Building"
+      ]
+    }
+  ],
+  "postingSchedule": {
+    "monday": {
+      "type": "Room Feature",
+      "example": "Start your week dreaming of luxury! Our Deluxe Suites offer breathtaking Red Sea views. Book now and save 20%! 🌊✨"
+    },
+    "tuesday": {
+      "type": "Restaurant Spotlight",
+      "example": "Taste Italy by the Red Sea! Our chef's special: Fresh Seafood Linguine with local catch. Reserve your table tonight! 🍝🦞"
+    },
+    "wednesday": {
+      "type": "Activity Highlight",
+      "example": "Dive into adventure! Explore the vibrant coral reefs of Sharm El Sheikh. PADI certified instructors available. 🤿🐠"
+    },
+    "thursday": {
+      "type": "Guest Testimonial",
+      "example": "⭐⭐⭐⭐⭐ 'Best beach resort in Egypt! Private beach was pristine, food was amazing!' - Sarah M. Book your stay today!"
+    },
+    "friday": {
+      "type": "Weekend Special",
+      "example": "Weekend Escape! 2 nights + breakfast + spa treatment = Pure bliss. Limited availability. Book now! 🏖️💆‍♀️"
+    },
+    "saturday": {
+      "type": "Event Showcase",
+      "example": "Dream wedding on the beach? We make it happen! Stunning sunset ceremonies, gourmet catering, perfect memories. 💒🌅"
+    },
+    "sunday": {
+      "type": "Beach/Sunset Photo",
+      "example": "Sunday vibes at Al Khayma 🌅 Where every sunset is a masterpiece. Your perfect getaway awaits! #SharmElSheikh"
+    }
+  },
+  "hashtags": {
+    "primary": [
+      "#AlKhaymaResort",
+      "#SharmElSheikh",
+      "#PrivateBeach",
+      "#RedSea",
+      "#LuxuryResort",
+      "#منتجع_الخيمة",
+      "#شرم_الشيخ"
+    ],
+    "secondary": [
+      "#BeachfrontResort",
+      "#ItalianRestaurant",
+      "#EgyptTravel",
+      "#BeachVacation",
+      "#LuxuryTravel",
+      "#ResortLife",
+      "#BeachResort",
+      "#TravelEgypt",
+      "#RedSeaDiving",
+      "#BeachWedding",
+      "#HoneymoonDestination",
+      "#FamilyVacation",
+      "#AllInclusive",
+      "#BeachLife",
+      "#SunsetViews"
+    ]
+  },
+  "faqs": [
+    {
+      "question": "Do you have a private beach?",
+      "answer": "Yes! Al Khayma Resort features an exclusive private beach with pristine white sand and crystal-clear Red Sea waters, available exclusively to our guests."
+    },
+    {
+      "question": "What type of cuisine do you serve?",
+      "answer": "Our signature restaurant specializes in authentic Italian cuisine, featuring fresh seafood, homemade pasta, and wood-fired pizzas. We also offer international dishes and can accommodate dietary restrictions."
+    },
+    {
+      "question": "Do you offer diving and water sports?",
+      "answer": "Absolutely! We have a PADI-certified diving center, snorkeling equipment, kayaks, paddleboards, and various water sports. The Red Sea's famous coral reefs are just minutes away."
+    },
+    {
+      "question": "Is the resort family-friendly?",
+      "answer": "Yes! We welcome families and offer a kids club, family rooms, children's pool, and special activities for young guests."
+    },
+    {
+      "question": "Can you host weddings and events?",
+      "answer": "Yes! We specialize in beach weddings, corporate events, and private celebrations. Our event team will help you create an unforgettable experience."
+    },
+    {
+      "question": "How far is the resort from Sharm El Sheikh Airport?",
+      "answer": "We're approximately 15 minutes from Sharm El Sheikh International Airport. We offer complimentary airport shuttle service for our guests."
+    },
+    {
+      "question": "What's included in the room rate?",
+      "answer": "Room rates include WiFi, parking, beach access, pool access, and daily housekeeping. We also offer all-inclusive packages with meals and activities."
+    },
+    {
+      "question": "Do you have spa services?",
+      "answer": "Yes! Our luxury spa offers massage therapy, facial treatments, body wraps, sauna, steam room, and wellness programs."
+    }
+  ],
+  "photos": {
+    "required": {
+      "exterior": 10,
+      "rooms": 15,
+      "beach": 20,
+      "restaurant": 15,
+      "food": 20,
+      "pool": 10,
+      "spa": 8,
+      "activities": 12,
+      "events": 10,
+      "staff": 5
+    },
+    "total": 125,
+    "guidelines": [
+      "4K resolution minimum",
+      "Natural lighting preferred",
+      "Show brand colors (navy, gold)",
+      "Include people enjoying facilities",
+      "Capture golden hour shots",
+      "Show unique selling points",
+      "Professional composition",
+      "No visible clutter"
+    ]
+  },
+  "videos": {
+    "required": [
+      "Resort tour (90 seconds)",
+      "Beach morning reel (60 seconds)",
+      "Beach evening reel (60 seconds)",
+      "Room tour (45 seconds)",
+      "Restaurant experience (45 seconds)",
+      "Activities montage (60 seconds)"
+    ],
+    "specifications": {
+      "resolution": "4K (3840x2160)",
+      "fps": 60,
+      "format": "MP4 (H.264)",
+      "aspectRatios": ["16:9", "9:16", "1:1"],
+      "duration": "30-90 seconds",
+      "subtitles": ["English", "Arabic"]
+    }
+  },
+  "reviewStrategy": {
+    "targetRating": 4.5,
+    "targetReviews": 50,
+    "responseTime": "24 hours",
+    "responseTemplate": {
+      "positive": "Thank you for your wonderful review! We're thrilled you enjoyed your stay at Al Khayma Resort. We look forward to welcoming you back soon! 🌊✨",
+      "negative": "Thank you for your feedback. We sincerely apologize for any inconvenience. Please contact us directly so we can make this right. Your satisfaction is our priority."
+    }
+  },
+  "competitorAnalysis": {
+    "competitors": [
+      "Four Seasons Resort Sharm El Sheikh",
+      "Rixos Premium Seagate",
+      "Savoy Sharm El Sheikh",
+      "Stella Di Mare Beach Resort",
+      "Jaz Mirabel Beach Resort"
+    ],
+    "differentiators": [
+      "Exclusive private beach",
+      "Authentic Italian restaurant",
+      "Boutique luxury experience",
+      "Personalized service",
+      "Competitive pricing",
+      "Prime location"
+    ]
+  }
+}

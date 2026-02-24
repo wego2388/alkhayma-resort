@@ -1,0 +1,372 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Hotel",
+      "@id": "https://elkheimaresort.com/#hotel",
+      "name": "El Kheima Beach Resort",
+      "alternateName": "منتجع الخيمة",
+      "description": "Private beachfront resort in Sharm El Sheikh offering sea view rooms, Italian dining, spa, and water sports. Ranked #1 of 8 resorts in the area. Perfect for couples & families.",
+      "url": "https://elkheimaresort.com",
+      "logo": "https://elkheimaresort.com/logo.png",
+      "image": [
+        "https://elkheimaresort.com/images/private-beach-sunset.jpg",
+        "https://elkheimaresort.com/images/sea-view-room.jpg",
+        "https://elkheimaresort.com/images/romantic-dinner.jpg",
+        "https://elkheimaresort.com/images/italian-restaurant.jpg"
+      ],
+      "priceRange": "$$$",
+      "starRating": {
+        "@type": "Rating",
+        "ratingValue": "5"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.7",
+        "reviewCount": "487",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Naama Bay",
+        "addressLocality": "Sharm El Sheikh",
+        "addressRegion": "South Sinai",
+        "postalCode": "46619",
+        "addressCountry": "EG"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "27.915752",
+        "longitude": "34.329869"
+      },
+      "telephone": "+20-XX-XXXX-XXXX",
+      "email": "info@alkhaymaresort.com",
+      "checkinTime": "14:00",
+      "checkoutTime": "12:00",
+      "numberOfRooms": "120",
+      "petsAllowed": true,
+      "amenityFeature": [
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Private Beach",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Free WiFi",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Free Parking",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Swimming Pool",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Spa",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Fitness Center",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Restaurant",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Bar",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Room Service",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Airport Shuttle",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Diving Center",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Water Sports",
+          "value": true
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "250",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "sameAs": [
+        "https://www.facebook.com/alkhaymaresort",
+        "https://www.instagram.com/alkhaymaresort",
+        "https://www.twitter.com/alkhaymaresort",
+        "https://www.tripadvisor.com/alkhaymaresort"
+      ]
+    },
+    {
+      "@type": "Restaurant",
+      "@id": "https://alkhaymaresort.com/#restaurant",
+      "name": "Al Khayma Italian Restaurant",
+      "alternateName": "مطعم الخيمة الإيطالي",
+      "description": "Authentic Italian restaurant in Sharm El Sheikh offering fresh seafood, homemade pasta, and wood-fired pizzas with stunning Red Sea views.",
+      "servesCuisine": ["Italian", "Mediterranean", "Seafood"],
+      "priceRange": "$$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Naama Bay",
+        "addressLocality": "Sharm El Sheikh",
+        "addressRegion": "South Sinai",
+        "postalCode": "46619",
+        "addressCountry": "EG"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "27.915752",
+        "longitude": "34.329869"
+      },
+      "telephone": "+20-XX-XXXX-XXXX",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "12:00",
+          "closes": "23:00"
+        }
+      ],
+      "acceptsReservations": true,
+      "hasMenu": "https://alkhaymaresort.com/restaurant/menu",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "180",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "TouristAttraction",
+      "@id": "https://alkhaymaresort.com/#beach",
+      "name": "Al Khayma Private Beach",
+      "alternateName": "شاطئ الخيمة الخاص",
+      "description": "Exclusive private beach in Sharm El Sheikh with pristine white sand, crystal-clear Red Sea waters, and premium beach services.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Sharm El Sheikh",
+        "addressRegion": "South Sinai",
+        "addressCountry": "EG"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "27.915752",
+        "longitude": "34.329869"
+      },
+      "isAccessibleForFree": false,
+      "publicAccess": false
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://alkhaymaresort.com/#business",
+      "name": "Al Khayma Resort & Spa",
+      "description": "Premier beachfront resort and spa in Sharm El Sheikh offering luxury accommodations, Italian dining, diving, and wellness services.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Naama Bay",
+        "addressLocality": "Sharm El Sheikh",
+        "addressRegion": "South Sinai",
+        "postalCode": "46619",
+        "addressCountry": "EG"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "27.915752",
+        "longitude": "34.329869"
+      },
+      "telephone": "+20-XX-XXXX-XXXX",
+      "email": "info@alkhaymaresort.com",
+      "url": "https://alkhaymaresort.com",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "paymentAccepted": ["Cash", "Credit Card", "Debit Card"],
+      "currenciesAccepted": "EGP, USD, EUR"
+    },
+    {
+      "@type": "Resort",
+      "@id": "https://alkhaymaresort.com/#resort",
+      "name": "Al Khayma Beach Resort",
+      "description": "All-inclusive beach resort in Sharm El Sheikh with private beach, water sports, diving center, spa, and Italian restaurant.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Naama Bay",
+        "addressLocality": "Sharm El Sheikh",
+        "addressRegion": "South Sinai",
+        "postalCode": "46619",
+        "addressCountry": "EG"
+      },
+      "amenityFeature": [
+        "Private Beach",
+        "Diving Center",
+        "Water Sports",
+        "Spa & Wellness",
+        "Italian Restaurant",
+        "Infinity Pool",
+        "Kids Club",
+        "Fitness Center",
+        "Wedding Venue",
+        "Conference Rooms"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://alkhaymaresort.com/#website",
+      "url": "https://alkhaymaresort.com",
+      "name": "Al Khayma Resort",
+      "description": "Official website of Al Khayma Resort - Luxury beachfront resort in Sharm El Sheikh",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Al Khayma Resort"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://alkhaymaresort.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "inLanguage": ["en", "ar"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://alkhaymaresort.com/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://alkhaymaresort.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Rooms",
+          "item": "https://alkhaymaresort.com/rooms"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Restaurant",
+          "item": "https://alkhaymaresort.com/restaurant"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Activities",
+          "item": "https://alkhaymaresort.com/activities"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://alkhaymaresort.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does Al Khayma Resort have a private beach?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, Al Khayma Resort features an exclusive private beach with pristine white sand and crystal-clear Red Sea waters, available exclusively to our guests."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What type of cuisine is served at the restaurant?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our signature restaurant specializes in authentic Italian cuisine, featuring fresh seafood, homemade pasta, and wood-fired pizzas with stunning Red Sea views."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the resort offer diving and water sports?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we have a PADI-certified diving center, snorkeling equipment, kayaks, paddleboards, and various water sports. The Red Sea's famous coral reefs are just minutes away."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How far is Al Khayma Resort from Sharm El Sheikh Airport?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The resort is approximately 15 minutes from Sharm El Sheikh International Airport. We offer complimentary airport shuttle service for our guests."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can Al Khayma Resort host weddings?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we specialize in beach weddings and can accommodate ceremonies and receptions for up to 200 guests. Our event team will help create your dream wedding."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Event",
+      "@id": "https://alkhaymaresort.com/#weddings",
+      "name": "Beach Weddings at Al Khayma Resort",
+      "description": "Stunning beach wedding venue in Sharm El Sheikh with sunset ceremonies, gourmet catering, and professional event planning.",
+      "location": {
+        "@type": "Place",
+        "name": "Al Khayma Resort Private Beach",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Sharm El Sheikh",
+          "addressCountry": "EG"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "price": "Contact for pricing",
+        "priceCurrency": "USD"
+      }
+    }
+  ]
+}

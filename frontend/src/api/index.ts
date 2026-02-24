@@ -1,5 +1,6 @@
 export { authApi } from './auth'
 export { roomsApi } from './rooms'
 export { productsApi } from './products'
+export { eventsApi } from './events'
 export { bookingsApi } from './bookings'
 export { default as apiClient } from './client'

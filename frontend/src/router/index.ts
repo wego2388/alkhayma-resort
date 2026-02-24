@@ -25,9 +25,19 @@ const router = createRouter({
       component: () => import('@/views/Restaurant.vue')
     },
     {
+      path: '/packages',
+      name: 'packages',
+      component: () => import('@/views/Packages.vue')
+    },
+    {
       path: '/activities',
       name: 'activities',
       component: () => import('@/views/Activities.vue')
+    },
+    {
+      path: '/events',
+      name: 'events',
+      component: () => import('@/views/Events.vue')
     },
     {
       path: '/about',
@@ -38,6 +48,11 @@ const router = createRouter({
       path: '/contact',
       name: 'contact',
       component: () => import('@/views/Contact.vue')
+    },
+    {
+      path: '/gallery',
+      name: 'gallery',
+      component: () => import('@/views/Gallery.vue')
     },
     {
       path: '/login',

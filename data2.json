@@ -1,0 +1,166 @@
+{
+  "brand_core": {
+    "name": "El Kheima Beach Resort",
+    "category": "Private Beachfront Resort",
+    "location": "Sharm El Sheikh, Egypt",
+    "airport_distance_minutes": 20,
+    "nearby_landmarks": [
+      "Ras Mohammed National Park - 24km",
+      "Ghibli Raceway - 15 minutes"
+    ],
+    "positioning_statement_en": "A private beachfront escape designed for romance, family comfort, and Red Sea adventure.",
+    "positioning_statement_ar": "منتجع مواجه لشاطئ خاص مصمم للرومانسية وراحة العائلة ومغامرات البحر الأحمر.",
+    "tone": ["Elegant", "Relaxed", "Premium", "Warm", "Experiential"]
+  },
+
+  "audience_segments": {
+    "couples": {
+      "pain_points": [
+        "Need privacy",
+        "Looking for romantic atmosphere",
+        "Sea view preference"
+      ],
+      "selling_angles": [
+        "Private balcony sunsets",
+        "Romantic Italian dinners",
+        "Quiet beachfront mornings"
+      ]
+    },
+    "families": {
+      "pain_points": [
+        "Need spacious rooms",
+        "Safe beach for kids",
+        "Activities for children"
+      ],
+      "selling_angles": [
+        "Large family rooms",
+        "Sandy safe beach",
+        "Kids-friendly environment"
+      ]
+    },
+    "adventurers": {
+      "pain_points": [
+        "Want activities",
+        "Want diving/snorkeling",
+        "Proximity to attractions"
+      ],
+      "selling_angles": [
+        "Water sports access",
+        "Near Ras Mohammed",
+        "Red Sea exploration"
+      ]
+    }
+  },
+
+  "rooms_detailed": [
+    {
+      "slug": "double-sea-view",
+      "name_en": "Double Room with Sea View",
+      "name_ar": "غرفة مزدوجة بإطلالة على البحر",
+      "target": "Couples",
+      "max_guests": 2,
+      "beds": "1 King Bed",
+      "short_desc_en": "Romantic sea view room with private balcony.",
+      "short_desc_ar": "غرفة رومانسية بإطلالة بحرية وشرفة خاصة.",
+      "long_desc_en": "Designed for couples seeking privacy and breathtaking Red Sea views, this room offers a serene balcony, direct beach access, and premium comfort.",
+      "long_desc_ar": "مصممة للأزواج الباحثين عن الخصوصية وإطلالة ساحرة على البحر الأحمر، مع شرفة خاصة ودخول مباشر للشاطئ.",
+      "included_experiences": [
+        "Private beach access",
+        "Sunset views",
+        "Italian dining access"
+      ],
+      "conversion_triggers": [
+        "Most popular for honeymoon stays",
+        "Limited sea view availability"
+      ]
+    },
+    {
+      "slug": "family-room",
+      "name_en": "Family Room",
+      "name_ar": "غرفة عائلية",
+      "target": "Families",
+      "max_guests": 5,
+      "beds": "2 Double Beds + Sofa",
+      "short_desc_en": "Spacious family comfort by the beach.",
+      "short_desc_ar": "مساحة عائلية مريحة بالقرب من الشاطئ.",
+      "long_desc_en": "Perfect for family vacations, offering large space, comfortable bedding, and direct access to the private sandy beach.",
+      "long_desc_ar": "مثالية لعطلات العائلة مع مساحة واسعة ودخول مباشر إلى الشاطئ الرملي الخاص.",
+      "included_experiences": [
+        "Family beach access",
+        "Kids activities",
+        "Outdoor pool"
+      ]
+    }
+  ],
+
+  "beach_ecosystem": {
+    "headline_en": "The Private Beach Experience",
+    "headline_ar": "تجربة الشاطئ الخاص",
+    "core_features": [
+      "Private sandy beach",
+      "Beachfront bar",
+      "Sunset seating area",
+      "Water sports center",
+      "Romantic setups",
+      "Family play zone"
+    ],
+    "upsell_paths": [
+      "Romantic Dinner Setup",
+      "Water Sports Package",
+      "Sunset Event Hosting"
+    ]
+  },
+
+  "restaurant_full": {
+    "name": "Italian Restaurant",
+    "description_en": "Authentic Italian flavors served by the sea.",
+    "description_ar": "نكهات إيطالية أصيلة بإطلالة على البحر.",
+    "open_hours": ["Late Breakfast", "Lunch", "Dinner"],
+    "atmosphere": ["Romantic", "Traditional", "Family Friendly"],
+    "event_use_cases": [
+      "Romantic dinner",
+      "Private celebrations",
+      "Family gatherings"
+    ]
+  },
+
+  "faq": [
+    {
+      "question_en": "How far is the resort from Sharm El Sheikh Airport?",
+      "answer_en": "The resort is only 20 minutes by car from the airport.",
+      "question_ar": "كم يبعد المنتجع عن مطار شرم الشيخ؟",
+      "answer_ar": "يبعد المنتجع حوالي 20 دقيقة فقط بالسيارة."
+    },
+    {
+      "question_en": "Does the resort have a private beach?",
+      "answer_en": "Yes, the resort offers exclusive access to a private sandy beach.",
+      "question_ar": "هل يوجد شاطئ خاص؟",
+      "answer_ar": "نعم، يوفر المنتجع شاطئًا رمليًا خاصًا للنزلاء."
+    }
+  ],
+
+  "conversion_microcopy": {
+    "urgency_en": [
+      "Only a few sea view rooms left.",
+      "High demand this season."
+    ],
+    "urgency_ar": [
+      "عدد محدود من الغرف المطلة على البحر.",
+      "إقبال مرتفع هذا الموسم."
+    ]
+  },
+
+  "seo_master": {
+    "primary_en": [
+      "Sharm El Sheikh Beach Resort",
+      "Private Beach Hotel Sharm",
+      "Romantic Resort Red Sea"
+    ],
+    "primary_ar": [
+      "منتجع شرم الشيخ على البحر",
+      "فندق شاطئ خاص شرم"
+    ],
+    "meta_description_en": "Private beachfront resort in Sharm El Sheikh with sea view rooms, Italian restaurant, spa, and water sports.",
+    "meta_description_ar": "منتجع مواجه للشاطئ في شرم الشيخ يوفر غرف مطلة على البحر ومطعم إيطالي وأنشطة بحرية."
+  }
+}
